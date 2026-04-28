@@ -16,7 +16,7 @@ allowed-tools: Read Edit Write Bash(pwd) Bash(test *) Bash(grep *) mcp__i18n__li
 
 先运行 `pwd` 获取当前工作目录的绝对路径，然后告诉用户：
 
-> 将把 `.mcp.json` 写入：`<pwd输出>/.mcp.json`，确认吗？（直接回车确认，或输入其他路径）
+> 将把 `.mcp.json` 写入：`<pwd输出>/.mcp.json`，确认吗？（输入 y 确认，或输入其他路径）
 
 用户确认或提供新路径后，再执行写入。
 
@@ -41,7 +41,7 @@ allowed-tools: Read Edit Write Bash(pwd) Bash(test *) Bash(grep *) mcp__i18n__li
 
 告诉用户：
 
-> 将把 i18n 规则写入：`<pwd输出>/CLAUDE.md`，确认吗？（直接回车确认，或输入其他路径）
+> 将把 i18n 规则写入：`<pwd输出>/CLAUDE.md`，确认吗？（输入 y 确认，或输入其他路径）
 
 用户确认或提供新路径后，检查该路径的 `CLAUDE.md`：
 
