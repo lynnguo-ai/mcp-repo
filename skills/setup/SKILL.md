@@ -39,7 +39,11 @@ allowed-tools: Read Edit Write Bash(pwd) Bash(test *) Bash(grep *) mcp__i18n__li
 
 **步骤 3 — 写入 CLAUDE.md**
 
-检查当前工作目录是否存在 `CLAUDE.md`：
+告诉用户：
+
+> 将把 i18n 规则写入：`<pwd输出>/CLAUDE.md`，确认吗？（直接回车确认，或输入其他路径）
+
+用户确认或提供新路径后，检查该路径的 `CLAUDE.md`：
 
 - **存在且已包含 `i18n 强制流程`** → 告知用户规则已存在，跳过写入
 - **存在但不包含** → 在文件末尾追加下方内容
