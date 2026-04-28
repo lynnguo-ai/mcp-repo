@@ -1,3 +1,32 @@
+## i18n 项目初始化（必须最先执行）
+
+**每次在一个目录中使用 i18n 工具前，必须先执行以下检查：**
+
+检查当前目录是否存在 `.mcp.json` 且包含 `mcpServers.i18n.headers.X-Project`：
+
+- **存在** → 直接继续
+- **不存在** → 必须先完成初始化，再执行任何其他操作：
+
+  1. 调用 `mcp__i18n__list_i18n_projects` 获取项目列表，展示给用户选择
+  2. 用户选择后，在**当前目录**写入 `.mcp.json`：
+     ```json
+     {
+       "mcpServers": {
+         "i18n": {
+           "type": "http",
+           "url": "https://nova-api.theplaud.com/mcp",
+           "headers": {
+             "X-Project": "<选中的项目名>"
+           }
+         }
+       }
+     }
+     ```
+  3. 检查当前目录的 `CLAUDE.md` 是否包含 `i18n 强制流程`，没有则追加（见下方）
+  4. 告知用户：**已完成初始化，请重启 Claude Code，重启后当前目录将使用「<项目名>」项目**
+
+---
+
 ## i18n 强制流程
 
 **所有涉及界面文案的任务（含 Figma 实现、新功能开发、文案修改）禁止硬编码字符串。必须先完成以下全部步骤，再写第一行 JSX：**
@@ -19,32 +48,12 @@
 - 禁止跳过 `search_i18n_keys` 直接调用 `prepare_i18n_key`（搜索是必选步骤）
 - 禁止在原文变更时跳过 `update_source_text` 直接用旧 key（会导致翻译与设计稿不一致）
 
-## 首次使用时自动初始化
-
-**在每次使用 i18n 工具之前，先检查当前目录的 `.mcp.json` 是否已包含 `mcpServers.i18n.headers.X-Project` 字段。若没有，执行以下初始化步骤（只做一次）：**
-
-1. **选择项目**：调用 `mcp__i18n__list_i18n_projects` 获取数据库中的最新项目列表，展示给用户选择
-2. **写入配置**：将选中的项目名写入当前目录的 `.mcp.json`，文件不存在则创建。写入格式如下（完整覆盖 `mcpServers.i18n` 字段，保留文件中其他已有内容）：
-   ```json
-   {
-     "mcpServers": {
-       "i18n": {
-         "type": "http",
-         "url": "https://nova-api.theplaud.com/mcp",
-         "headers": {
-           "X-Project": "<选中的项目名>"
-         }
-       }
-     }
-   }
-   ```
-3. **写入规则**：检查当前目录的 `CLAUDE.md` 是否包含 `i18n 强制流程`，没有则追加上方规则章节
-4. 告知用户：**配置已写入 `.mcp.json`，请重启 Claude Code 后再继续原始任务**（重启后 X-Project header 才会生效）
+---
 
 ## 切换项目
 
 当用户说「切换项目」「换到 xx 项目」「switch project」等，执行：
 
 1. 调用 `mcp__i18n__list_i18n_projects` 获取最新项目列表，展示给用户选择
-2. 将选中的项目名写入当前目录的 `.mcp.json`（完整写入 `mcpServers.i18n`，含 `type`、`url` 和 `headers.X-Project`，格式与首次初始化相同）
+2. 将选中的项目名写入当前目录的 `.mcp.json`（完整写入 `mcpServers.i18n`，含 `type`、`url` 和 `headers.X-Project`，格式与初始化相同）
 3. 告知用户重启 Claude Code 后生效
