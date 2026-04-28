@@ -1,0 +1,14 @@
+{
+  "_projects": {
+    "web": "plaud-web",
+    "app": "plaud-app",
+    "app_h5": "plaud-app H5",
+    "desktop": "plaud-desktop"
+  },
+  "mcpServers": {
+    "i18n": {
+      "type": "http",
+      "url": "https://nova-api.theplaud.com/mcp"
+    }
+  }
+}
