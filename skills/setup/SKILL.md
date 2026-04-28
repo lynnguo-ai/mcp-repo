@@ -14,7 +14,11 @@ allowed-tools: Read Edit Write Bash(pwd) Bash(test *) Bash(grep *) mcp__i18n__li
 
 **步骤 2 — 写入 .mcp.json**
 
-先运行 `pwd` 获取当前工作目录的绝对路径，将 `.mcp.json` 写入该目录（即 `<pwd输出>/.mcp.json`）。
+先运行 `pwd` 获取当前工作目录的绝对路径，然后告诉用户：
+
+> 将把 `.mcp.json` 写入：`<pwd输出>/.mcp.json`，确认吗？（直接回车确认，或输入其他路径）
+
+用户确认或提供新路径后，再执行写入。
 
 - 如果 `.mcp.json` 已存在：只更新 `mcpServers.i18n.headers.X-Project` 字段，保留其他内容
 - 如果不存在：创建文件，写入以下内容（`<project>` 替换为用户选择的项目名）：
