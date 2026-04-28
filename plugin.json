@@ -8,7 +8,6 @@
   "skills": "./skills/",
   "mcpServers": {
     "i18n": {
-      "type": "http",
       "url": "https://nova-api.theplaud.com/mcp"
     }
   }
