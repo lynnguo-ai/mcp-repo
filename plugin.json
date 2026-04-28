@@ -1,0 +1,8 @@
+{
+  "name": "nova-i18n",
+  "version": "0.1.0",
+  "description": "PLAUD internal i18n translation tools for Claude Code",
+  "author": {
+    "name": "Plaud AI"
+  }
+}
