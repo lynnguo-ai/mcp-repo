@@ -1,6 +1,6 @@
 ---
 name: setup
-description: 初始化当前项目的 i18n 配置：选择项目、写入 CLAUDE.md 规则。安装 nova-i18n 插件后在每个项目目录执行一次。
+description: 初始化当前项目的 i18n 配置：选择项目、写入 .mcp.json、写入 CLAUDE.md 规则。安装 nova-i18n 插件后在每个项目目录执行一次。
 allowed-tools: Read Edit Write Bash(test *) Bash(grep *) mcp__i18n__list_i18n_projects mcp__i18n__set_project
 ---
 
@@ -10,9 +10,30 @@ allowed-tools: Read Edit Write Bash(test *) Bash(grep *) mcp__i18n__list_i18n_pr
 
 调用 `mcp__i18n__list_i18n_projects` 列出所有可用项目，展示给用户选择。
 
-用户确认后，调用 `mcp__i18n__set_project` 将选择保存到账号（跨目录、跨 session 生效）。
+用户确认后，调用 `mcp__i18n__set_project` 将选择保存到账号。
 
-**步骤 2 — 写入 CLAUDE.md**
+**步骤 2 — 写入 .mcp.json**
+
+在当前工作目录读取或创建 `.mcp.json`，将选中的项目写入 `mcpServers.i18n.headers.X-Project`。
+
+- 如果 `.mcp.json` 已存在：只更新 `mcpServers.i18n.headers.X-Project` 字段，保留其他内容
+- 如果不存在：创建文件，写入以下内容（`<project>` 替换为用户选择的项目名）：
+
+```json
+{
+  "mcpServers": {
+    "i18n": {
+      "type": "http",
+      "url": "https://nova-api.theplaud.com/mcp",
+      "headers": {
+        "X-Project": "<project>"
+      }
+    }
+  }
+}
+```
+
+**步骤 3 — 写入 CLAUDE.md**
 
 检查当前工作目录是否存在 `CLAUDE.md`：
 
@@ -45,8 +66,10 @@ allowed-tools: Read Edit Write Bash(test *) Bash(grep *) mcp__i18n__list_i18n_pr
 - 禁止在原文变更时跳过 `update_source_text` 直接用旧 key（会导致翻译与设计稿不一致）
 ```
 
-**步骤 3 — 完成**
+**步骤 4 — 完成**
 
 告知用户：
 - 已选择的项目名
+- `.mcp.json` 写入路径
 - CLAUDE.md 写入结果（新建 / 追加 / 已存在）
+- 提示：切换到其他目录后再次运行 `/setup` 可为该目录选择不同的项目
