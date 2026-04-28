@@ -24,7 +24,20 @@
 当 i18n 工具在某个项目中**第一次被调用**时，按顺序执行：
 
 1. **选择项目**：调用 `mcp__i18n__list_i18n_projects` 获取数据库中的最新项目列表，展示给用户选择
-2. **写入配置**：将选中的项目名写入当前目录的 `.mcp.json`（`mcpServers.i18n.headers["X-Project"]`），文件不存在则创建
+2. **写入配置**：将选中的项目名写入当前目录的 `.mcp.json`，文件不存在则创建。写入格式如下（完整覆盖 `mcpServers.i18n` 字段，保留文件中其他已有内容）：
+   ```json
+   {
+     "mcpServers": {
+       "i18n": {
+         "type": "http",
+         "url": "https://nova-api.theplaud.com/mcp",
+         "headers": {
+           "X-Project": "<选中的项目名>"
+         }
+       }
+     }
+   }
+   ```
 3. **写入规则**：检查当前目录的 `CLAUDE.md` 是否包含 `i18n 强制流程`，没有则追加上方规则章节
 4. 完成后告知用户，继续执行原始任务
 
@@ -33,5 +46,5 @@
 当用户说「切换项目」「换到 xx 项目」「switch project」等，执行：
 
 1. 调用 `mcp__i18n__list_i18n_projects` 获取最新项目列表，展示给用户选择
-2. 将选中的项目名写入当前目录的 `.mcp.json`（`mcpServers.i18n.headers["X-Project"]`）
+2. 将选中的项目名写入当前目录的 `.mcp.json`（完整写入 `mcpServers.i18n`，含 `type`、`url` 和 `headers.X-Project`，格式与首次初始化相同）
 3. 告知用户重启 Claude Code 后生效
