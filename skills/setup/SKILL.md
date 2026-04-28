@@ -1,7 +1,7 @@
 ---
 name: setup
 description: 初始化当前项目的 i18n 配置：选择项目、写入 .mcp.json、写入 CLAUDE.md 规则。安装 nova-i18n 插件后在每个项目目录执行一次。
-allowed-tools: Read Edit Write Bash(test *) Bash(grep *) mcp__i18n__list_i18n_projects mcp__i18n__set_project
+allowed-tools: Read Edit Write Bash(pwd) Bash(test *) Bash(grep *) mcp__i18n__list_i18n_projects mcp__i18n__set_project
 ---
 
 按以下步骤完成当前项目的 i18n 初始化：
@@ -14,7 +14,7 @@ allowed-tools: Read Edit Write Bash(test *) Bash(grep *) mcp__i18n__list_i18n_pr
 
 **步骤 2 — 写入 .mcp.json**
 
-在当前工作目录读取或创建 `.mcp.json`，将选中的项目写入 `mcpServers.i18n.headers.X-Project`。
+先运行 `pwd` 获取当前工作目录的绝对路径，将 `.mcp.json` 写入该目录（即 `<pwd输出>/.mcp.json`）。
 
 - 如果 `.mcp.json` 已存在：只更新 `mcpServers.i18n.headers.X-Project` 字段，保留其他内容
 - 如果不存在：创建文件，写入以下内容（`<project>` 替换为用户选择的项目名）：
