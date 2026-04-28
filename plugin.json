@@ -5,18 +5,11 @@
   "author": {
     "name": "Plaud AI"
   },
-  "userConfig": {
-    "project": {
-      "type": "string",
-      "title": "Project",
-      "description": "Which PLAUD project are you working on? Options: web, app, app_h5, desktop"
-    }
-  },
   "skills": "./skills/",
   "mcpServers": {
     "i18n": {
       "type": "http",
-      "url": "https://nova-api.theplaud.com/mcp?project=${user_config.project}"
+      "url": "https://nova-api.theplaud.com/mcp"
     }
   }
 }
