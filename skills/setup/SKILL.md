@@ -1,21 +1,26 @@
 ---
 name: setup
-description: 将 i18n 强制流程写入当前项目的 CLAUDE.md，确保所有文案操作走 MCP 工具流程。安装 nova-i18n 插件后执行一次即可。
-allowed-tools: Read Edit Write Bash(test *) Bash(grep *)
+description: 初始化当前项目的 i18n 配置：选择项目、写入 CLAUDE.md 规则。安装 nova-i18n 插件后在每个项目目录执行一次。
+allowed-tools: Read Edit Write Bash(test *) Bash(grep *) mcp__i18n__list_i18n_projects mcp__i18n__set_project
 ---
 
-将以下 i18n 强制流程规则写入当前项目根目录的 `CLAUDE.md`。
+按以下步骤完成当前项目的 i18n 初始化：
 
-**执行步骤：**
+**步骤 1 — 选择 i18n 项目**
 
-1. 检查项目根目录（当前工作目录）是否存在 `CLAUDE.md`
-2. 如果存在，检查文件中是否已包含 `i18n 强制流程` 字样
-   - 已包含 → 告知用户规则已存在，无需重复写入，结束
-   - 不包含 → 在文件末尾追加下方内容
-3. 如果不存在，创建 `CLAUDE.md` 并写入下方内容
-4. 完成后告知用户写入的文件路径
+调用 `mcp__i18n__list_i18n_projects` 列出所有可用项目，展示给用户选择。
 
-**写入内容（追加到文件末尾）：**
+用户确认后，调用 `mcp__i18n__set_project` 将选择保存到账号（跨目录、跨 session 生效）。
+
+**步骤 2 — 写入 CLAUDE.md**
+
+检查当前工作目录是否存在 `CLAUDE.md`：
+
+- **存在且已包含 `i18n 强制流程`** → 告知用户规则已存在，跳过写入
+- **存在但不包含** → 在文件末尾追加下方内容
+- **不存在** → 创建 `CLAUDE.md` 并写入下方内容
+
+**写入内容：**
 
 ```
 ## i18n 强制流程
@@ -39,3 +44,9 @@ allowed-tools: Read Edit Write Bash(test *) Bash(grep *)
 - 禁止跳过 `search_i18n_keys` 直接调用 `prepare_i18n_key`（搜索是必选步骤）
 - 禁止在原文变更时跳过 `update_source_text` 直接用旧 key（会导致翻译与设计稿不一致）
 ```
+
+**步骤 3 — 完成**
+
+告知用户：
+- 已选择的项目名
+- CLAUDE.md 写入结果（新建 / 追加 / 已存在）

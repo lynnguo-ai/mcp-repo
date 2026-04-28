@@ -21,4 +21,4 @@
 
 ## 切换项目
 
-当用户说「切换项目」「换到 xx 项目」「switch project」等，调用 `mcp__i18n__list_i18n_projects` 列出可用项目，用户选择后调用 `set_project` 完成切换，立即生效。
+当用户说「切换项目」「换到 xx 项目」「switch project」等，调用 `mcp__i18n__list_i18n_projects` 列出可用项目，用户选择后调用 `mcp__i18n__set_project` 完成切换，立即生效。
