@@ -18,6 +18,7 @@
 - 禁止把文字字符串直接硬编码进 JSX
 - 禁止跳过 `search_i18n_keys` 直接调用 `prepare_i18n_key`（搜索是必选步骤）
 - 禁止在原文变更时跳过 `update_source_text` 直接用旧 key（会导致翻译与设计稿不一致）
+- 禁止写本地翻译 JSON 文件，所有翻译必须通过 `save_translations` MCP 工具写入数据库
 
 ## 切换项目
 
